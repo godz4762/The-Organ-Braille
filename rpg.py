@@ -1,0 +1,114 @@
+# print game name
+
+
+print("====================================")
+print()
+print("          The Organ Braille         ")
+print()
+print("====================================")
+
+inventory = []
+
+# ask for player username
+
+name = input("What is your name, Traveler? ")
+
+# welcome them
+
+
+print(f"Welcome to the game, {name}, I wish you the best of luck!")
+
+
+answer = input("Do you wish to proceed further? ")
+
+
+if answer.lower() == "no":
+	print("Well then, off you go!")
+	exit()
+
+
+print("Choose your class!")
+print("1. Knight")
+print("2. Rogue")
+print("3. Mage")
+
+
+valid_class = False
+
+
+while valid_class == False:
+	player_class = input("> ")
+
+	if player_class == "1":
+		print("A mighty knight you are! Move forward with pride!")
+		valid_class = True
+	elif player_class == "2":
+		print("A stealthy rogue, sneak between shadows and cut from behind!")
+		valid_class = True
+	elif player_class == "3":
+		print("A powerful mage, cast spells of fire and ice to batter your opponent!")
+		valid_class = True
+	else:
+		print("That isn't a class!")
+
+if player_class == "1":
+	print("health - 150")
+	player_health = 150
+	print("damage - 80")
+	player_damage = 80
+elif player_class == "2":
+    print("health - 80")
+    player_health = 80
+    print("damage - 120")
+    player_damage = 120
+elif player_class == "3":
+    print("health - 130")
+    player_health = 130
+    print("damage - 90")
+    player_damage = 90
+
+alchemist_shop = False        
+
+
+print("You procede along a small path towards a giant cave far in the distance.")
+
+print("The cave was home to an evil dragon, the end goal of your quest is to slay him and save the kingdom!")
+
+print("Will you procede forward to fight a Goblin or detour at the Alchemy shop?")
+
+while alchemist_shop == False:
+    potioninq = input("Goblin or Alchemist? ")
+
+
+    if potioninq.lower() == "alchemist":
+        print("You say hello to the Alchemist and he gives you a potion and a small piece of bread for the road.")
+        inventory.append("Potion")
+        inventory.append("Bread")
+        alchemist_shop = True
+    elif potioninq.lower() == "goblin":
+        print("You procede forward to battle the goblin")
+        alchemist_shop = True
+    else:
+        print("That isn't an option!")
+
+print("You enter a battle with a goblin!")
+enemy_health = 125
+enemy_damage = 50
+enemy_name = "Goblin"
+battle_complete = False
+
+while battle_complete == False:
+    print("1. Fight")
+    print("2. Item")
+    print("3. Run")
+    battle_selection = int(input("> "))
+
+    
+    if battle_selection == "1":
+        print(f"You dealt {player_damage} to {enemy_name}")
+        enemy_health = enemy_health - player_damage
+
+
+print("enemy_health")
+    
+
