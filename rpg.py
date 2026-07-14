@@ -54,16 +54,19 @@ while valid_class == False:
 if player_class == "1":
 	print("health - 150")
 	player_health = 150
+	max_player_health = 150
 	print("damage - 80")
 	player_damage = 80
 elif player_class == "2":
     print("health - 80")
     player_health = 80
+    max_player_health = 80
     print("damage - 120")
     player_damage = 120
 elif player_class == "3":
     print("health - 130")
     player_health = 130
+    max_player_health = 130
     print("damage - 90")
     player_damage = 90
 
@@ -95,20 +98,42 @@ print("You enter a battle with a goblin!")
 enemy_health = 125
 enemy_damage = 50
 enemy_name = "Goblin"
-battle_complete = False
 
-while battle_complete == False:
+while player_health > 0 and enemy_health > 0:
     print("1. Fight")
     print("2. Item")
     print("3. Run")
     battle_selection = int(input("> "))
 
     
-    if battle_selection == "1":
+    if battle_selection == 1:
         print(f"You dealt {player_damage} to {enemy_name}")
         enemy_health = enemy_health - player_damage
+    elif battle_selection == 2:
+        itemselected = input(inventory )
+        if itemselected.lower() == "potion":
+                inventory.remove("Potion")
+                player_health = player_health + 80
+                print("You drank the Alchemists potion. You regained 80 Health.")
+                if player_health > max_player_health:
+                        player_health = max_player_health
+        elif itemselected.lower() == "bread":
+                inventory.remove("Bread")
+                player_health = player_health + 50
+                print("You ate the bread. You regained 50 Health.")
+                if player_health > max_player_health:
+                        player_health = max_player_health
+    elif battle_selection == 3:
+        print("You can't run, idiot.")
+        player_health = player_health - 15
+        print("You tripped and took 15 damage.")
+    else:
+        print("Not an option!") 
+        
+                
 
-
-print("enemy_health")
-    
+print(enemy_health)
+print(inventory)    
+print(player_health)
+print(max_player_health)
 
