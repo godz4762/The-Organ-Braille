@@ -54,6 +54,7 @@ while valid_class == False:
 if player_class == "1":
 	print("health - 150")
 	player_health = 150
+	
 	max_player_health = 150
 	print("damage - 80")
 	player_damage = 80
@@ -94,46 +95,85 @@ while alchemist_shop == False:
     else:
         print("That isn't an option!")
 
-print("You enter a battle with a goblin!")
-enemy_health = 125
-enemy_damage = 50
-enemy_name = "Goblin"
+def battle(enemy_name, enemy_health, enemy_damage):
+    global player_health
+    global inventory
+    global max_player_health
+    global player_damage
+    import random
+    print(f"You enter a battle with a {enemy_name}!")
 
-while player_health > 0 and enemy_health > 0:
-    print("1. Fight")
-    print("2. Item")
-    print("3. Run")
-    battle_selection = int(input("> "))
-
-    
-    if battle_selection == 1:
-        print(f"You dealt {player_damage} to {enemy_name}")
-        enemy_health = enemy_health - player_damage
-    elif battle_selection == 2:
-        itemselected = input(inventory )
-        if itemselected.lower() == "potion":
-                inventory.remove("Potion")
-                player_health = player_health + 80
-                print("You drank the Alchemists potion. You regained 80 Health.")
-                if player_health > max_player_health:
-                        player_health = max_player_health
-        elif itemselected.lower() == "bread":
-                inventory.remove("Bread")
-                player_health = player_health + 50
-                print("You ate the bread. You regained 50 Health.")
-                if player_health > max_player_health:
-                        player_health = max_player_health
-    elif battle_selection == 3:
-        print("You can't run, idiot.")
-        player_health = player_health - 15
-        print("You tripped and took 15 damage.")
-    else:
-        print("Not an option!") 
+    while player_health > 0 and enemy_health > 0:
+        item_selected = False
+        print("Select the number of the action you would like to do!")
+        print("1. Fight")
+        print("2. Item")
+        print("3. Run")
+        battle_selection = int(input("> "))
         
+    
+        if battle_selection == 1:
+            print(f"You dealt {player_damage} to {enemy_name}")
+            enemy_health = enemy_health - player_damage
+            print(f"{enemy_name} has {enemy_health} HP remaining!")
+        elif battle_selection == 2:
+            if not inventory:
+                print("Your inventory is empty!")
+                continue
+            else:    
+                while item_selected == False:
+                    print("Inventory")
+                    for item in inventory:
+                        print(f"- {item}")
+
+
+                    itemselected = input("Use which item? ")
+                    if itemselected.lower() == "potion":
+                            if "Potion" in inventory:
+                                inventory.remove("Potion")
+                                player_health = player_health + 80
+                                print("You drank the Alchemists potion. You regained 80 Health.")
+                                item_selected = True
+                                if player_health > max_player_health:
+                                        player_health = max_player_health
+                            else:
+                                print("You do not have that!")          
+                    elif itemselected.lower() == "bread":
+                        if "Bread" in inventory:
+                            inventory.remove("Bread")
+                            player_health = player_health + 50
+                            print("You ate the bread. You regained 50 Health.")
+                            item_selected = True
+                            if player_health > max_player_health:
+                                    player_health = max_player_health
+        elif battle_selection == 3:
+            print("You can't run, idiot.")
+            player_health = player_health - 15
+            print("You tripped and took 15 damage.")
+        else:
+            print("Not an option!")
+
+
+        if player_health <= 0:
+            print("You Died!")
+            exit()
+
+
+        if enemy_health > 0: 
+     
+            enemy_damage = random.randint(15, 30)
+     
+            player_health = player_health - enemy_damage
+     
+     
+            print(f"{enemy_name} attacks!")
+            print(f"You take {enemy_damage} damage")
+
+
+        print(f"You have {player_health} HP Remaining!")
+
+
+battle("Goblin", 125, 15)                   
                 
 
-print(enemy_health)
-print(inventory)    
-print(player_health)
-print(max_player_health)
 
