@@ -176,6 +176,9 @@ def battle(enemy_name, enemy_health, enemy_damage):
 battle("Goblin", 125, 15)    
 
 
+import random
+
+
 player_gold = random.randint(150, 250)
 
 
@@ -194,8 +197,8 @@ print("What would you like to buy?")
 road_shop = False
 
 
-while road_shop == False
-    item_bought = int(input("Potion, Bread, Witchs Brew. Type exit to leave without buying anything.")
+while road_shop == False:
+    item_bought = input("Potion, Bread, Witchs Brew. Type exit to leave without buying anything. ")
 
 
     if item_bought.lower() == "potion":
