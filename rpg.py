@@ -173,7 +173,51 @@ def battle(enemy_name, enemy_health, enemy_damage):
         print(f"You have {player_health} HP Remaining!")
 
 
-battle("Goblin", 125, 15)                   
-                
+battle("Goblin", 125, 15)    
 
+
+player_gold = random.randint(150, 250)
+
+
+print("You won! The goblin falls to the ground defeated.")
+print()
+print()
+print("He points you down the path. Ahead was a small shop.")               
+print(f"The goblin gives you {player_gold} gold.")
+print()
+print()
+print()
+print("Down the path was a little shop. You stop inside.")
+print("Spend your gold here!")
+print("What would you like to buy?")
+
+road_shop = False
+
+
+while road_shop == False
+    item_bought = int(input("Potion, Bread, Witchs Brew. Type exit to leave without buying anything.")
+
+
+    if item_bought.lower() == "potion":
+        print("You bought a Potion!")
+        inventory.append("Potion")
+        road_shop = True
+    
+
+    elif item_bought.lower() == "bread":
+        print("You bought bread!")
+        inventory.append("Bread")
+        road_shop = True
+
+    elif item_bought.lower() == "witchs brew":
+        print("You bought a bubbling Witch's brew!")
+        inventory.append("Witch's Brew")
+        road_shop = True
+
+    elif item_bought.lower() == "exit":
+        print("You leave the shop after taking a look around.")
+        road_shop = True
+
+    else:
+        print("Not an option!")
 
