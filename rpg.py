@@ -198,24 +198,27 @@ road_shop = False
 
 
 while road_shop == False:
-    item_bought = input("Potion, Bread, Witchs Brew. Type exit to leave without buying anything. ")
+    print(f"You have {player_gold} to spend!")
+    item_bought = input("Potion 35 Gold, Bread 20 Gold, Witchs Brew 80 Gold. Type exit to leave without buying anything. ")
 
 
     if item_bought.lower() == "potion":
         print("You bought a Potion!")
         inventory.append("Potion")
-        road_shop = True
-    
+        player_gold = player_gold - 35
+        print(f"You have {player_gold} gold left!")    
 
     elif item_bought.lower() == "bread":
         print("You bought bread!")
         inventory.append("Bread")
-        road_shop = True
+        player_gold = player_gold - 20
+        print(f"You have {player_gold} gold left!")
 
     elif item_bought.lower() == "witchs brew":
         print("You bought a bubbling Witch's brew!")
         inventory.append("Witch's Brew")
-        road_shop = True
+        player_gold = player_gold - 80
+        print(f"You have {player_gold} gold left!")
 
     elif item_bought.lower() == "exit":
         print("You leave the shop after taking a look around.")
@@ -224,3 +227,38 @@ while road_shop == False:
     else:
         print("Not an option!")
 
+
+print("You stumble across a man along the path after you leave the shop.")
+print("He asks if you want to know about the path ahead of you.")
+
+
+manquestion = input("> ")
+
+
+if manquestion.lower() == "yes":
+    print("The man tells you about a powerful Ogre down the path a little while.")
+    print("You feel as if you will cross paths with that monster.")
+
+
+else:
+    print("You feel an impending sense of doom of the path ahead of you.")
+    print("You don't know how to feel about it.")
+
+
+print("You come across a bridge. There's a seemingly evil presence under it. Will you investigate or not.")
+
+
+bridgelook = input("> ")
+
+if bridgelook.lower() == "yes":
+    print("You find a horrifying looking monster. He tells you to not worry.")
+    print()
+    print("He tells you that he wasn't anything to worry about.")
+    print("The creature asks if you wanted to be friends, and introduces himself as Golem.")
+    print()
+    print("You tell him you will be his friend, and he gives you 200 Gold.")
+    player_gold = player_gold + 200
+
+
+else:
+    print("You cross the bridge carefully. Nothing happens as you cross, and you continue down the path.")
