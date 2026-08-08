@@ -1,3 +1,4 @@
+
 # print game name
 
 
@@ -127,7 +128,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
                         print(f"- {item}")
 
 
-                    itemselected = input("Use which item? ")
+                    itemselected = input("Use which item? Type exit to not use an item. ")
                     if itemselected.lower() == "potion":
                             if "Potion" in inventory:
                                 inventory.remove("Potion")
@@ -146,6 +147,23 @@ def battle(enemy_name, enemy_health, enemy_damage):
                             item_selected = True
                             if player_health > max_player_health:
                                     player_health = max_player_health
+                    elif itemselected.lower() == "witch's brew":
+                        if "Witch's Brew" in inventory:
+                            inventory.remove("Witch's Brew")
+                            brewkill = random.randint(1, 2)
+                            if brewkill >= 2:
+                                player_health = max_player_health
+                                print("You are healed fully by the Witch's Brew")
+                                itemselected = True
+                            elif brewkill <= 1:
+                                print("The Witch's Brew eat and burns through your throat.")
+                                print("You collapse slowly to the ground.")
+                                print("Game over.")
+                                exit()
+                    elif itemselected.lower() == "exit":
+                        itemselected = True
+                        break
+                continue
         elif battle_selection == 3:
             print("You can't run, idiot.")
             player_health = player_health - 15
@@ -199,7 +217,7 @@ road_shop = False
 
 while road_shop == False:
     print(f"You have {player_gold} to spend!")
-    item_bought = input("Potion 35 Gold, Bread 20 Gold, Witchs Brew 80 Gold. Type exit to leave without buying anything. ")
+    item_bought = input("Potion 35 Gold, Bread 20 Gold, Witch's Brew 80 Gold. Type exit to leave without buying anything. ")
 
 
     if item_bought.lower() == "potion":
@@ -214,7 +232,7 @@ while road_shop == False:
         player_gold = player_gold - 20
         print(f"You have {player_gold} gold left!")
 
-    elif item_bought.lower() == "witchs brew":
+    elif item_bought.lower() == "witch's brew":
         print("You bought a bubbling Witch's brew!")
         inventory.append("Witch's Brew")
         player_gold = player_gold - 80
@@ -232,7 +250,7 @@ print("You stumble across a man along the path after you leave the shop.")
 print("He asks if you want to know about the path ahead of you.")
 
 
-manquestion = input("> ")
+manquestion = input("yes or no? ")
 
 
 if manquestion.lower() == "yes":
@@ -248,7 +266,7 @@ else:
 print("You come across a bridge. There's a seemingly evil presence under it. Will you investigate or not.")
 
 
-bridgelook = input("> ")
+bridgelook = input("yes or no ")
 
 if bridgelook.lower() == "yes":
     print("You find a horrifying looking monster. He tells you to not worry.")
@@ -262,3 +280,9 @@ if bridgelook.lower() == "yes":
 
 else:
     print("You cross the bridge carefully. Nothing happens as you cross, and you continue down the path.")
+
+
+print("You felt a sense of unease rise onto your back. You turn and a goblin ambushes you!")
+
+
+battle("Strong Goblin", 300, 40)
