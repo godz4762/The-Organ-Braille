@@ -150,7 +150,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
                     elif itemselected.lower() == "witch's brew":
                         if "Witch's Brew" in inventory:
                             inventory.remove("Witch's Brew")
-                            brewkill = random.randint(1, 2)
+                            brewkill = random.randint(1, 10000)
                             if brewkill >= 2:
                                 player_health = max_player_health
                                 print("You are healed fully by the Witch's Brew")
