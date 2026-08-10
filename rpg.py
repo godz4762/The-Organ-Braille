@@ -55,7 +55,6 @@ while valid_class == False:
 if player_class == "1":
 	print("health - 150")
 	player_health = 150
-	
 	max_player_health = 150
 	print("damage - 80")
 	player_damage = 80
@@ -110,14 +109,14 @@ def battle(enemy_name, enemy_health, enemy_damage):
         print("1. Fight")
         print("2. Item")
         print("3. Run")
-        battle_selection = int(input("> "))
+        battle_selection = (input("> "))
         
     
-        if battle_selection == 1:
+        if battle_selection.lower() in ["1", "fight"]:
             print(f"You dealt {player_damage} to {enemy_name}")
             enemy_health = enemy_health - player_damage
             print(f"{enemy_name} has {enemy_health} HP remaining!")
-        elif battle_selection == 2:
+        elif battle_selection.lower() in ["2", "item"]:
             if not inventory:
                 print("Your inventory is empty!")
                 continue
@@ -164,7 +163,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
                         itemselected = True
                         break
                 continue
-        elif battle_selection == 3:
+        elif battle_selection.lower() in ["3", "run"]:
             print("You can't run, idiot.")
             player_health = player_health - 15
             print("You tripped and took 15 damage.")
@@ -179,8 +178,14 @@ def battle(enemy_name, enemy_health, enemy_damage):
 
         if enemy_health > 0: 
      
-            enemy_damage = random.randint(15, 30)
+            
      
+            enemy_damage = random.randint(
+                enemy_damage - 5,
+                enemy_damage + 5
+            )
+                                                
+
             player_health = player_health - enemy_damage
      
      
@@ -286,3 +291,24 @@ print("You felt a sense of unease rise onto your back. You turn and a goblin amb
 
 
 battle("Strong Goblin", 300, 40)
+
+
+print("The strong goblin falls beneath your strength. He gives you a permanent health upgrade.")
+
+
+if player_class == 1:
+    print("Your max HP increased to 350")
+    max_player_health = 350
+    player_health = max_player_health
+    print("Your HP was also fully restored!")
+elif player_class == 2:
+    print("Your max HP increased to 180")
+    max_player_health = 180
+    player_health = max_player_health
+    print("Your HP was also fully restored!")
+elif player_class == 3:
+    print("Your max HP increased to 230")
+    max_player_health = 230
+    player_health = max_player_health
+
+
