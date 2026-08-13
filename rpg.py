@@ -113,9 +113,15 @@ def battle(enemy_name, enemy_health, enemy_damage):
         
     
         if battle_selection.lower() in ["1", "fight"]:
-            print(f"You dealt {player_damage} to {enemy_name}")
-            enemy_health = enemy_health - player_damage
+            damage = random.randint(
+                player_damage - 25,
+                player_damage + 15
+            )
+            enemy_health = enemy_health - damage
+            print(f"You dealt {damage} to {enemy_name}")
             print(f"{enemy_name} has {enemy_health} HP remaining!")
+
+
         elif battle_selection.lower() in ["2", "item"]:
             if not inventory:
                 print("Your inventory is empty!")
