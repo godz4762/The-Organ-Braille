@@ -169,11 +169,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
             print("You tripped and took 15 damage.")
         else:
             print("Not an option!")
-
-
-        if player_health <= 0:
-            print("You Died!")
-            exit()
+            continue
 
 
         if enemy_health > 0: 
@@ -187,6 +183,11 @@ def battle(enemy_name, enemy_health, enemy_damage):
                                                 
 
             player_health = player_health - enemy_damage
+
+
+        if player_health <= 0:
+            print("You died!")
+            exit()    
      
      
             print(f"{enemy_name} attacks!")
