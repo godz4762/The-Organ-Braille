@@ -319,3 +319,54 @@ elif player_class == 3:
     player_health = max_player_health
 
 
+print("You press on going forawrd.")
+print()
+print()
+print()
+print("You enter a forest. You heard a twig break behind you and you look to see a young girl.")
+
+
+print("Be a monster?")
+print("1. Yes.")
+print("2. No.")
+
+
+brutality = input("> ")
+
+
+    if brutality.lower() == "yes":
+        print("You feel stronger. You leave the splatter of blood on the ground.")
+        print("Your fate is sealed.")
+        print()
+        print()
+        print()
+        print("You encounter the dreadful Ogre. Be prepared.")
+        print("He judges you a distasteful stain of this world. Good luck.")
+        battle("Ogre", 2000, 80)
+
+
+    elif brutality.lower() == "no":
+        print("You give the girl a little flower.")
+        print("She runs off into the wilderness.")
+
+
+        if manquestion.lower() == "yes":
+            print("You come across the Ogre that the strange man told you about.")
+            print("He thanks you for gifting his friend a flower.")
+            print()
+        elif manquestion.lower() == "no":
+            print("You come across an Ogre")
+            print("He thanks you for gifting his friend a flower.")
+
+print("Attack the Ogre in fear?")
+print("Yes.")
+print("No.")
+ogrefight = input("> ")
+
+
+    if ogrefight.lower() == "yes":
+        print("You swing at the Ogre. He initates a fight.")
+        battle("Ogre", 850, 60)
+    elif ogrefight.lower() == "no":
+        print("You carry on down the path.")
+        print("Good choice.")
