@@ -10,6 +10,8 @@ print("====================================")
 
 inventory = []
 
+hpup1 = False
+
 # ask for player username
 
 name = input("What is your name, Traveler? ")
@@ -100,11 +102,12 @@ def battle(enemy_name, enemy_health, enemy_damage):
     global inventory
     global max_player_health
     global player_damage
+    global hpup1
     import random
     print(f"You enter a battle with a {enemy_name}!")
 
     while player_health > 0 and enemy_health > 0:
-        item_selected = False
+        itemselected = False
         print("Select the number of the action you would like to do!")
         print("1. Fight")
         print("2. Item")
@@ -127,7 +130,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
                 print("Your inventory is empty!")
                 continue
             else:    
-                while item_selected == False:
+                while itemselected == False:
                     print("Inventory")
                     for item in inventory:
                         print(f"- {item}")
@@ -137,21 +140,32 @@ def battle(enemy_name, enemy_health, enemy_damage):
                     if itemselected.lower() == "potion":
                             if "Potion" in inventory:
                                 inventory.remove("Potion")
-                                player_health = player_health + 80
-                                print("You drank the Alchemists potion. You regained 80 Health.")
+                                if hpup1 == False:
+                                    player_health = player_health + 80
+                                    print("You drank the potion. You regained 80 Health.")
+                                elif hpup1 == True:
+                                    player_health = player_health + 130
+                                    print("You drank the potion. You regained 130 Health.")
+                                print(player_health)
                                 item_selected = True
                                 if player_health > max_player_health:
                                         player_health = max_player_health
+                                print(player_health)
                             else:
                                 print("You do not have that!")          
                     elif itemselected.lower() == "bread":
                         if "Bread" in inventory:
                             inventory.remove("Bread")
-                            player_health = player_health + 50
-                            print("You ate the bread. You regained 50 Health.")
+                            if hpup1 == False:
+                                player_health = player_health + 50
+                                print("You ate the bread. You regained 50 Health.")
+                            elif hpup1 == True:
+                                player_health = player_health + 90
+                                print("You ate the bread. You regained 90 Health.")
                             item_selected = True
                             if player_health > max_player_health:
                                     player_health = max_player_health
+                            print(player_health)
                     elif itemselected.lower() == "witch's brew":
                         if "Witch's Brew" in inventory:
                             inventory.remove("Witch's Brew")
@@ -233,22 +247,31 @@ while road_shop == False:
 
 
     if item_bought.lower() == "potion":
-        print("You bought a Potion!")
-        inventory.append("Potion")
-        player_gold = player_gold - 35
-        print(f"You have {player_gold} gold left!")    
+        if player_gold >= 35:
+            print("You bought a Potion!")
+            inventory.append("Potion")
+            player_gold = player_gold - 35
+            print(f"You have {player_gold} gold left!")    
+        elif player_gold < 35:
+            print("You don't have enough gold...")
 
     elif item_bought.lower() == "bread":
-        print("You bought bread!")
-        inventory.append("Bread")
-        player_gold = player_gold - 20
-        print(f"You have {player_gold} gold left!")
+        if player_gold >= 20:
+            print("You bought bread!")
+            inventory.append("Bread")
+            player_gold = player_gold - 20
+            print(f"You have {player_gold} gold left!")
+        elif player_gold < 20:
+            print("You don't have enough gold...")
 
     elif item_bought.lower() == "witch's brew":
-        print("You bought a bubbling Witch's brew!")
-        inventory.append("Witch's Brew")
-        player_gold = player_gold - 80
-        print(f"You have {player_gold} gold left!")
+        if player_gold >= 80:
+            print("You bought a bubbling Witch's brew!")
+            inventory.append("Witch's Brew")
+            player_gold = player_gold - 80
+            print(f"You have {player_gold} gold left!")
+        elif player_gold < 80:
+            print("You don't have enough gold...")
 
     elif item_bought.lower() == "exit":
         print("You leave the shop after taking a look around.")
@@ -317,6 +340,10 @@ elif player_class == 3:
     print("Your max HP increased to 230")
     max_player_health = 230
     player_health = max_player_health
+    print("Your HP was also fully restored!")
+
+
+hpup1 = True
 
 
 print("You press on going forawrd.")
@@ -334,39 +361,39 @@ print("2. No.")
 brutality = input("> ")
 
 
-    if brutality.lower() == "yes":
-        print("You feel stronger. You leave the splatter of blood on the ground.")
-        print("Your fate is sealed.")
+if brutality.lower() == "yes":
+    print("You feel stronger. You leave the splatter of blood on the ground.")
+    print("Your fate is sealed.")
+    print()
+    print()
+    print()
+    print("You encounter the dreadful Ogre. Be prepared.")
+    print("He judges you a distasteful stain of this world. Good luck.")
+    battle("Ogre", 2000, 80)
+
+
+elif brutality.lower() == "no":
+    print("You give the girl a little flower.")
+    print("She runs off into the wilderness.")
+
+
+    if manquestion.lower() == "yes":
+        print("You come across the Ogre that the strange man told you about.")
+        print("He thanks you for gifting his friend a flower.")
         print()
-        print()
-        print()
-        print("You encounter the dreadful Ogre. Be prepared.")
-        print("He judges you a distasteful stain of this world. Good luck.")
-        battle("Ogre", 2000, 80)
+    elif manquestion.lower() == "no":
+        print("You come across an Ogre")
+        print("He thanks you for gifting his friend a flower.")
+
+    print("Attack the Ogre in fear?")
+    print("Yes.")
+    print("No.")
+    ogrefight = input("> ")
 
 
-    elif brutality.lower() == "no":
-        print("You give the girl a little flower.")
-        print("She runs off into the wilderness.")
-
-
-        if manquestion.lower() == "yes":
-            print("You come across the Ogre that the strange man told you about.")
-            print("He thanks you for gifting his friend a flower.")
-            print()
-        elif manquestion.lower() == "no":
-            print("You come across an Ogre")
-            print("He thanks you for gifting his friend a flower.")
-
-print("Attack the Ogre in fear?")
-print("Yes.")
-print("No.")
-ogrefight = input("> ")
-
-
-    if ogrefight.lower() == "yes":
+    if ogrefight.lower() in ["1", "yes"]:
         print("You swing at the Ogre. He initates a fight.")
         battle("Ogre", 850, 60)
-    elif ogrefight.lower() == "no":
+    elif ogrefight.lower() in ["2", "no"]:
         print("You carry on down the path.")
         print("Good choice.")
