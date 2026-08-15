@@ -40,33 +40,36 @@ valid_class = False
 
 
 while valid_class == False:
-	player_class = input("> ")
+	player_class_input = input("> ")
 
-	if player_class == "1":
+	if player_class_input == "1":
 		print("A mighty knight you are! Move forward with pride!")
 		valid_class = True
-	elif player_class == "2":
+		player_class = 1
+	elif player_class_input == "2":
 		print("A stealthy rogue, sneak between shadows and cut from behind!")
 		valid_class = True
-	elif player_class == "3":
+		player_class = 2
+	elif player_class_input == "3":
 		print("A powerful mage, cast spells of fire and ice to batter your opponent!")
 		valid_class = True
+		player_class = 3
 	else:
 		print("That isn't a class!")
 
-if player_class == "1":
+if player_class == 1:
 	print("health - 150")
 	player_health = 150
 	max_player_health = 150
 	print("damage - 80")
 	player_damage = 80
-elif player_class == "2":
+elif player_class == 2:
     print("health - 80")
     player_health = 80
     max_player_health = 80
     print("damage - 120")
     player_damage = 120
-elif player_class == "3":
+elif player_class == 3:
     print("health - 130")
     player_health = 130
     max_player_health = 130
@@ -196,13 +199,13 @@ def battle(enemy_name, enemy_health, enemy_damage):
      
             
      
-            enemy_damage = random.randint(
+            enemy_attack = random.randint(
                 enemy_damage - 5,
                 enemy_damage + 5
             )
                                                 
 
-            player_health = player_health - enemy_damage
+            player_health = player_health - enemy_attack
 
 
         if player_health <= 0:
@@ -238,47 +241,52 @@ print("Down the path was a little shop. You stop inside.")
 print("Spend your gold here!")
 print("What would you like to buy?")
 
-road_shop = False
+def shop():
+    global player_gold
+    road_shop = False
 
 
-while road_shop == False:
-    print(f"You have {player_gold} to spend!")
-    item_bought = input("Potion 35 Gold, Bread 20 Gold, Witch's Brew 80 Gold. Type exit to leave without buying anything. ")
+    while road_shop == False:
+        print(f"You have {player_gold} to spend!")
+        item_bought = input("Potion 35 Gold, Bread 20 Gold, Witch's Brew 80 Gold. Type exit to leave without buying anything. ")
 
 
-    if item_bought.lower() == "potion":
-        if player_gold >= 35:
-            print("You bought a Potion!")
-            inventory.append("Potion")
-            player_gold = player_gold - 35
-            print(f"You have {player_gold} gold left!")    
-        elif player_gold < 35:
-            print("You don't have enough gold...")
+        if item_bought.lower() == "potion":
+            if player_gold >= 35:
+                print("You bought a Potion!")
+                inventory.append("Potion")
+                player_gold = player_gold - 35
+                print(f"You have {player_gold} gold left!")    
+            elif player_gold < 35:
+                print("You don't have enough gold...")
 
-    elif item_bought.lower() == "bread":
-        if player_gold >= 20:
-            print("You bought bread!")
-            inventory.append("Bread")
-            player_gold = player_gold - 20
-            print(f"You have {player_gold} gold left!")
-        elif player_gold < 20:
-            print("You don't have enough gold...")
+        elif item_bought.lower() == "bread":
+            if player_gold >= 20:
+                print("You bought bread!")
+                inventory.append("Bread")
+                player_gold = player_gold - 20
+                print(f"You have {player_gold} gold left!")
+            elif player_gold < 20:
+                print("You don't have enough gold...")
 
-    elif item_bought.lower() == "witch's brew":
-        if player_gold >= 80:
-            print("You bought a bubbling Witch's brew!")
-            inventory.append("Witch's Brew")
-            player_gold = player_gold - 80
-            print(f"You have {player_gold} gold left!")
-        elif player_gold < 80:
-            print("You don't have enough gold...")
+        elif item_bought.lower() == "witch's brew":
+            if player_gold >= 80:
+                print("You bought a bubbling Witch's brew!")
+                inventory.append("Witch's Brew")
+                player_gold = player_gold - 80
+                print(f"You have {player_gold} gold left!")
+            elif player_gold < 80:
+                print("You don't have enough gold...")
 
-    elif item_bought.lower() == "exit":
-        print("You leave the shop after taking a look around.")
-        road_shop = True
+        elif item_bought.lower() == "exit":
+            print("You leave the shop after taking a look around.")
+            road_shop = True
 
-    else:
-        print("Not an option!")
+        else:
+            print("Not an option!")
+
+
+shop()
 
 
 print("You stumble across a man along the path after you leave the shop.")
@@ -369,7 +377,7 @@ if brutality.lower() == "yes":
     print()
     print("You encounter the dreadful Ogre. Be prepared.")
     print("He judges you a distasteful stain of this world. Good luck.")
-    battle("Ogre", 2000, 80)
+    battle("Ogre", 1500, 60)
 
 
 elif brutality.lower() == "no":
@@ -394,6 +402,10 @@ elif brutality.lower() == "no":
     if ogrefight.lower() in ["1", "yes"]:
         print("You swing at the Ogre. He initates a fight.")
         battle("Ogre", 850, 60)
+        player_gold = player_gold + random.randint(500, 700)
     elif ogrefight.lower() in ["2", "no"]:
         print("You carry on down the path.")
         print("Good choice.")
+
+
+shop()
