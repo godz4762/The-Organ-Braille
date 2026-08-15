@@ -19,8 +19,9 @@ name = input("What is your name, Traveler? ")
 # welcome them
 
 
-print(f"Welcome to the game, {name}, I wish you the best of luck!")
+print(f"Welcome to the kingdom, {name}, I wish you the best of luck!")
 
+# troll
 
 answer = input("Do you wish to proceed further? ")
 
@@ -29,6 +30,7 @@ if answer.lower() == "no":
 	print("Well then, off you go!")
 	exit()
 
+# classes
 
 print("Choose your class!")
 print("1. Knight")
@@ -56,6 +58,8 @@ while valid_class == False:
 		player_class = 3
 	else:
 		print("That isn't a class!")
+		
+# set stats
 
 if player_class == 1:
 	print("health - 150")
@@ -75,6 +79,8 @@ elif player_class == 3:
     max_player_health = 130
     print("damage - 90")
     player_damage = 90
+
+# small little thing to give player items
 
 alchemist_shop = False        
 
@@ -100,6 +106,8 @@ while alchemist_shop == False:
     else:
         print("That isn't an option!")
 
+# define battle function bc we're gonna need that maybe.
+
 def battle(enemy_name, enemy_health, enemy_damage):
     global player_health
     global inventory
@@ -117,6 +125,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
         print("3. Run")
         battle_selection = (input("> "))
         
+# fight
     
         if battle_selection.lower() in ["1", "fight"]:
             damage = random.randint(
@@ -127,6 +136,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
             print(f"You dealt {damage} to {enemy_name}")
             print(f"{enemy_name} has {enemy_health} HP remaining!")
 
+# items (my finest work)
 
         elif battle_selection.lower() in ["2", "item"]:
             if not inventory:
@@ -186,6 +196,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
                         itemselected = True
                         break
                 continue
+# troll more (run)
         elif battle_selection.lower() in ["3", "run"]:
             print("You can't run, idiot.")
             player_health = player_health - 15
@@ -194,7 +205,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
             print("Not an option!")
             continue
 
-
+# enemy attacks
         if enemy_health > 0: 
      
             
@@ -207,7 +218,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
 
             player_health = player_health - enemy_attack
 
-
+# check if you died like a pleb
         if player_health <= 0:
             print("You died!")
             exit()    
@@ -219,13 +230,13 @@ def battle(enemy_name, enemy_health, enemy_damage):
 
         print(f"You have {player_health} HP Remaining!")
 
-
+# actually run the battle fnct
 battle("Goblin", 125, 15)    
 
 
 import random
 
-
+# money
 player_gold = random.randint(150, 250)
 
 
@@ -241,6 +252,7 @@ print("Down the path was a little shop. You stop inside.")
 print("Spend your gold here!")
 print("What would you like to buy?")
 
+# add shop func
 def shop():
     global player_gold
     road_shop = False
@@ -285,7 +297,7 @@ def shop():
         else:
             print("Not an option!")
 
-
+# let the player get items
 shop()
 
 
@@ -295,7 +307,7 @@ print("He asks if you want to know about the path ahead of you.")
 
 manquestion = input("yes or no? ")
 
-
+# story stuff
 if manquestion.lower() == "yes":
     print("The man tells you about a powerful Ogre down the path a little while.")
     print("You feel as if you will cross paths with that monster.")
@@ -308,7 +320,7 @@ else:
 
 print("You come across a bridge. There's a seemingly evil presence under it. Will you investigate or not.")
 
-
+# prompt for more money
 bridgelook = input("yes or no ")
 
 if bridgelook.lower() == "yes":
@@ -327,13 +339,13 @@ else:
 
 print("You felt a sense of unease rise onto your back. You turn and a goblin ambushes you!")
 
-
+# more battle
 battle("Strong Goblin", 300, 40)
 
 
 print("The strong goblin falls beneath your strength. He gives you a permanent health upgrade.")
 
-
+# give player more hp for later things
 if player_class == 1:
     print("Your max HP increased to 350")
     max_player_health = 350
@@ -350,10 +362,10 @@ elif player_class == 3:
     player_health = max_player_health
     print("Your HP was also fully restored!")
 
-
+# make it so that the hpup affects items
 hpup1 = True
 
-
+# story
 print("You press on going forawrd.")
 print()
 print()
@@ -365,7 +377,7 @@ print("Be a monster?")
 print("1. Yes.")
 print("2. No.")
 
-
+# ask if the player wants to fight and impossible fight
 brutality = input("> ")
 
 
@@ -377,7 +389,7 @@ if brutality.lower() == "yes":
     print()
     print("You encounter the dreadful Ogre. Be prepared.")
     print("He judges you a distasteful stain of this world. Good luck.")
-    battle("Ogre", 1500, 60)
+    battle("Enraged Ogre", 9999999999, 100)
 
 
 elif brutality.lower() == "no":
@@ -385,27 +397,31 @@ elif brutality.lower() == "no":
     print("She runs off into the wilderness.")
 
 
-    if manquestion.lower() == "yes":
-        print("You come across the Ogre that the strange man told you about.")
-        print("He thanks you for gifting his friend a flower.")
-        print()
-    elif manquestion.lower() == "no":
-        print("You come across an Ogre")
-        print("He thanks you for gifting his friend a flower.")
+if manquestion.lower() == "yes":
+    print("You come across the Ogre that the strange man told you about.")
+    print("He thanks you for gifting his friend a flower.")
+    print()
+elif manquestion.lower() == "no":
+    print("You come across an Ogre")
+    print("He thanks you for gifting his friend a flower.")
 
-    print("Attack the Ogre in fear?")
-    print("Yes.")
-    print("No.")
-    ogrefight = input("> ")
+# hard fight?
 
+print("Attack the Ogre in fear?")
+print("Yes.")
+print("No.")
+ogrefight = input("> ")
 
-    if ogrefight.lower() in ["1", "yes"]:
-        print("You swing at the Ogre. He initates a fight.")
-        battle("Ogre", 850, 60)
-        player_gold = player_gold + random.randint(500, 700)
-    elif ogrefight.lower() in ["2", "no"]:
-        print("You carry on down the path.")
-        print("Good choice.")
+# good luckkk
 
+if ogrefight.lower() in ["1", "yes"]:
+    print("You swing at the Ogre. He initates a fight.")
+    battle("Ogre", 850, 60)
+    player_gold = player_gold + random.randint(500, 700)
+# boring
+elif ogrefight.lower() in ["2", "no"]:
+    print("You carry on down the path.")
+    print("Good choice.")
 
+# atp the player wants or needs more items depending on their choices, so let em have it.
 shop()
