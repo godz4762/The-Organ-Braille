@@ -1,4 +1,4 @@
-
+import json
 # print game name
 
 
@@ -11,6 +11,7 @@ print("====================================")
 inventory = []
 
 hpup1 = False
+townfirsttime = True
 
 # ask for player username
 
@@ -48,14 +49,17 @@ while valid_class == False:
 		print("A mighty knight you are! Move forward with pride!")
 		valid_class = True
 		player_class = 1
+		player_class_name = "Knight"
 	elif player_class_input == "2":
 		print("A stealthy rogue, sneak between shadows and cut from behind!")
 		valid_class = True
 		player_class = 2
+		player_class_name = "Rogue"
 	elif player_class_input == "3":
 		print("A powerful mage, cast spells of fire and ice to batter your opponent!")
 		valid_class = True
 		player_class = 3
+		player_class_name = "Mage"
 	else:
 		print("That isn't a class!")
 		
@@ -160,7 +164,7 @@ def battle(enemy_name, enemy_health, enemy_damage):
                                     player_health = player_health + 130
                                     print("You drank the potion. You regained 130 Health.")
                                 print(player_health)
-                                item_selected = True
+                                itemselected = True
                                 if player_health > max_player_health:
                                         player_health = max_player_health
                                 print(player_health)
@@ -175,14 +179,14 @@ def battle(enemy_name, enemy_health, enemy_damage):
                             elif hpup1 == True:
                                 player_health = player_health + 90
                                 print("You ate the bread. You regained 90 Health.")
-                            item_selected = True
+                            itemselected = True
                             if player_health > max_player_health:
                                     player_health = max_player_health
                             print(player_health)
                     elif itemselected.lower() == "witch's brew":
                         if "Witch's Brew" in inventory:
                             inventory.remove("Witch's Brew")
-                            brewkill = random.randint(1, 10000)
+                            brewkill = random.randint(1, 1000)
                             if brewkill >= 2:
                                 player_health = max_player_health
                                 print("You are healed fully by the Witch's Brew")
@@ -253,7 +257,7 @@ print("Spend your gold here!")
 print("What would you like to buy?")
 
 # add shop func
-def shop():
+def road_shop():
     global player_gold
     road_shop = False
 
@@ -298,7 +302,7 @@ def shop():
             print("Not an option!")
 
 # let the player get items
-shop()
+road_shop()
 
 
 print("You stumble across a man along the path after you leave the shop.")
@@ -387,7 +391,7 @@ if brutality.lower() == "yes":
     print()
     print()
     print()
-    print("You encounter the dreadful Ogre. Be prepared.")
+    print("You encounter a dreadful Ogre. Be prepared.")
     print("He judges you a distasteful stain of this world. Good luck.")
     battle("Enraged Ogre", 9999999999, 100)
 
@@ -424,4 +428,94 @@ elif ogrefight.lower() in ["2", "no"]:
     print("Good choice.")
 
 # atp the player wants or needs more items depending on their choices, so let em have it.
-shop()
+road_shop()
+
+
+def town_shop():
+    global player_gold
+    road_shop = False
+
+    print("The shopkeep welcomes you to his shop.")
+    
+    
+    while road_shop == False:
+        print(f"You have {player_gold} to spend!")
+        item_bought = input("Potion 35 Gold, Bread 20 Gold, Witch's Brew 80 Gold. Type exit to leave without buying anything. ")
+    
+    
+        if item_bought.lower() == "potion":
+            if player_gold >= 35:
+                print("You bought a Potion!")
+                inventory.append("Potion")
+                player_gold = player_gold - 35
+                print(f"You have {player_gold} gold left!")    
+            elif player_gold < 35:
+                print("You don't have enough gold...")
+    
+        elif item_bought.lower() == "bread":
+            if player_gold >= 20:
+                print("You bought bread!")
+                inventory.append("Bread")
+                player_gold = player_gold - 20
+                print(f"You have {player_gold} gold left!")
+            elif player_gold < 20:
+                print("You don't have enough gold...")
+    
+        elif item_bought.lower() == "witch's brew":
+            if player_gold >= 80:
+                print("You bought a bubbling Witch's brew!")
+                inventory.append("Witch's Brew")
+                player_gold = player_gold - 80
+                print(f"You have {player_gold} gold left!")
+            elif player_gold < 80:
+                print("You don't have enough gold...")
+    
+        elif item_bought.lower() == "exit":
+            print("You leave the shop after taking a look around.")
+            road_shop = True
+    
+        else:
+            print("Not an option!")
+
+
+
+def save_game():
+    save_data = {
+        "player_health" : player_health,
+        "max_player_health" : max_player_health,
+        "player_damage" : player_damage,
+        "player_class" : player_class,
+        "player_class_name" : player_class_name,
+        "inventory" : inventory,
+        "hpup1" : hpup1,
+        "player_gold" : player_gold,
+        "townfirsttime" : townfirsttime
+    }
+
+    with open("save.json", "w") as file:
+        json.dump(save_data, file, indent=4)
+
+
+    print("Game saved!")
+
+def town():
+    global player_gold
+    global townfirsttime
+    towncomplete = False
+    while towncomplete == False:
+        if townfirsttime == True:
+            print("You continue down the path and emerge from the forest. You end up at a large town.")
+        else:
+            print("You head back to the town.")
+        
+        
+        print()
+        print()
+        print()
+        print("What would you like to do?")
+        print("1, Shop")
+        print("2. Tavern.")
+        print("3. Leave the town. WARNING, this will proceed your game and you may not be able to come back for a long time.")
+
+
+        townoption = input("> ")
