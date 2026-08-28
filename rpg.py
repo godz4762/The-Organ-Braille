@@ -1,114 +1,130 @@
 import json
 # print game name
 
-
-print("====================================")
-print()
-print("          The Organ Braille         ")
-print()
-print("====================================")
-
-inventory = []
-
-hpup1 = False
-townfirsttime = True
-
-# ask for player username
-
-name = input("What is your name, Traveler? ")
-
-# welcome them
+def intro():
+    print("====================================")
+    print()
+    print("          The Organ Braille         ")
+    print()
+    print("====================================")
 
 
-print(f"Welcome to the kingdom, {name}, I wish you the best of luck!")
+    global player_health
+    global inventory
+    global max_player_health
+    global player_damage
+    global hpup1
+    global townfirsttime
+    global player_gold
+    global player_class
+    global player_class_name
+    global name
+    import random
 
-# troll
+    inventory = []
 
-answer = input("Do you wish to proceed further? ")
+    hpup1 = False
+    townfirsttime = True
 
+    # ask for player username
 
-if answer.lower() == "no":
-	print("Well then, off you go!")
-	exit()
+    name = input("What is your name, Traveler? ")
 
-# classes
-
-print("Choose your class!")
-print("1. Knight")
-print("2. Rogue")
-print("3. Mage")
-
-
-valid_class = False
-
-
-while valid_class == False:
-	player_class_input = input("> ")
-
-	if player_class_input == "1":
-		print("A mighty knight you are! Move forward with pride!")
-		valid_class = True
-		player_class = 1
-		player_class_name = "Knight"
-	elif player_class_input == "2":
-		print("A stealthy rogue, sneak between shadows and cut from behind!")
-		valid_class = True
-		player_class = 2
-		player_class_name = "Rogue"
-	elif player_class_input == "3":
-		print("A powerful mage, cast spells of fire and ice to batter your opponent!")
-		valid_class = True
-		player_class = 3
-		player_class_name = "Mage"
-	else:
-		print("That isn't a class!")
-		
-# set stats
-
-if player_class == 1:
-	print("health - 150")
-	player_health = 150
-	max_player_health = 150
-	print("damage - 80")
-	player_damage = 80
-elif player_class == 2:
-    print("health - 80")
-    player_health = 80
-    max_player_health = 80
-    print("damage - 120")
-    player_damage = 120
-elif player_class == 3:
-    print("health - 130")
-    player_health = 130
-    max_player_health = 130
-    print("damage - 90")
-    player_damage = 90
-
-# small little thing to give player items
-
-alchemist_shop = False        
+    # welcome them
 
 
-print("You procede along a small path towards a giant cave far in the distance.")
+    print(f"Welcome to the kingdom, {name}, I wish you the best of luck!")
 
-print("The cave was home to an evil dragon, the end goal of your quest is to slay him and save the kingdom!")
+    # troll
 
-print("Will you procede forward to fight a Goblin or detour at the Alchemy shop?")
-
-while alchemist_shop == False:
-    potioninq = input("Goblin or Alchemist? ")
+    answer = input("Do you wish to proceed further? ")
 
 
-    if potioninq.lower() == "alchemist":
-        print("You say hello to the Alchemist and he gives you a potion and a small piece of bread for the road.")
-        inventory.append("Potion")
-        inventory.append("Bread")
-        alchemist_shop = True
-    elif potioninq.lower() == "goblin":
-        print("You procede forward to battle the goblin")
-        alchemist_shop = True
-    else:
-        print("That isn't an option!")
+    if answer.lower() == "no":
+    	print("Well then, off you go!")
+    	exit()
+
+    # classes
+
+    print("Choose your class!")
+    print("1. Knight")
+    print("2. Rogue")
+    print("3. Mage")
+
+
+    valid_class = False
+
+
+    while valid_class == False:
+    	player_class_input = input("> ")
+
+    	if player_class_input == "1":
+    		print("A mighty knight you are! Move forward with pride!")
+    		valid_class = True
+    		player_class = 1
+    		player_class_name = "Knight"
+    	elif player_class_input == "2":
+    		print("A stealthy rogue, sneak between shadows and cut from behind!")
+    		valid_class = True
+    		player_class = 2
+    		player_class_name = "Rogue"
+    	elif player_class_input == "3":
+    		print("A powerful mage, cast spells of fire and ice to batter your opponent!")
+    		valid_class = True
+    		player_class = 3
+    		player_class_name = "Mage"
+    	else:
+    		print("That isn't a class!")
+    		
+    # set stats
+
+    if player_class == 1:
+    	print("health - 150")
+    	player_health = 150
+    	max_player_health = 150
+    	print("damage - 80")
+    	player_damage = 80
+    elif player_class == 2:
+        print("health - 80")
+        player_health = 80
+        max_player_health = 80
+        print("damage - 120")
+        player_damage = 120
+    elif player_class == 3:
+        print("health - 130")
+        player_health = 130
+        max_player_health = 130
+        print("damage - 90")
+        player_damage = 90
+
+    # small little thing to give player items
+
+    alchemist_shop = False        
+
+
+    print("You procede along a small path towards a giant cave far in the distance.")
+
+    print("The cave was home to an evil dragon, the end goal of your quest is to slay him and save the kingdom!")
+
+    print("Will you procede forward to fight a Goblin or detour at the Alchemy shop?")
+
+    while alchemist_shop == False:
+        potioninq = input("Goblin or Alchemist? ")
+
+
+        if potioninq.lower() == "alchemist":
+            print("You say hello to the Alchemist and he gives you a potion and a small piece of bread for the road.")
+            inventory.append("Potion")
+            inventory.append("Bread")
+            alchemist_shop = True
+        elif potioninq.lower() == "goblin":
+            print("You procede forward to battle the goblin")
+            alchemist_shop = True
+        else:
+            print("That isn't an option!")
+
+
+intro()
 
 # define battle function bc we're gonna need that maybe.
 
@@ -118,6 +134,11 @@ def battle(enemy_name, enemy_health, enemy_damage):
     global max_player_health
     global player_damage
     global hpup1
+    global townfirsttime
+    global player_gold
+    global player_class
+    global player_class_name
+    global name
     import random
     print(f"You enter a battle with a {enemy_name}!")
 
@@ -235,26 +256,41 @@ def battle(enemy_name, enemy_health, enemy_damage):
         print(f"You have {player_health} HP Remaining!")
 
 # actually run the battle fnct
-battle("Goblin", 125, 15)    
+def story1():
+    global player_health
+    global inventory
+    global max_player_health
+    global player_damage
+    global hpup1
+    global townfirsttime
+    global player_gold
+    global player_class
+    global player_class_name
+    global name
+    import random
+    battle("Goblin", 125, 15)    
 
 
-import random
+    import random
 
-# money
-player_gold = random.randint(150, 250)
+    # money
+    player_gold = random.randint(150, 250)
 
 
-print("You won! The goblin falls to the ground defeated.")
-print()
-print()
-print("He points you down the path. Ahead was a small shop.")               
-print(f"The goblin gives you {player_gold} gold.")
-print()
-print()
-print()
-print("Down the path was a little shop. You stop inside.")
-print("Spend your gold here!")
-print("What would you like to buy?")
+    print("You won! The goblin falls to the ground defeated.")
+    print()
+    print()
+    print("He points you down the path. Ahead was a small shop.")               
+    print(f"The goblin gives you {player_gold} gold.")
+    print()
+    print()
+    print()
+    print("Down the path was a little shop. You stop inside.")
+    print("Spend your gold here!")
+    print("What would you like to buy?")
+
+
+story1()
 
 # add shop func
 def road_shop():
@@ -302,130 +338,157 @@ def road_shop():
             print("Not an option!")
 
 # let the player get items
-road_shop()
+def story2():
+    global player_health
+    global inventory
+    global max_player_health
+    global player_damage
+    global hpup1
+    global townfirsttime
+    global player_gold
+    global player_class
+    global player_class_name
+    global name
+    import random
+    road_shop()
 
 
-print("You stumble across a man along the path after you leave the shop.")
-print("He asks if you want to know about the path ahead of you.")
+    print("You stumble across a man along the path after you leave the shop.")
+    print("He asks if you want to know about the path ahead of you.")
 
 
-manquestion = input("yes or no? ")
+    manquestion = input("yes or no? ")
 
-# story stuff
-if manquestion.lower() == "yes":
-    print("The man tells you about a powerful Ogre down the path a little while.")
-    print("You feel as if you will cross paths with that monster.")
-
-
-else:
-    print("You feel an impending sense of doom of the path ahead of you.")
-    print("You don't know how to feel about it.")
+    # story stuff
+    if manquestion.lower() == "yes":
+        print("The man tells you about a powerful Ogre down the path a little while.")
+        print("You feel as if you will cross paths with that monster.")
 
 
-print("You come across a bridge. There's a seemingly evil presence under it. Will you investigate or not.")
-
-# prompt for more money
-bridgelook = input("yes or no ")
-
-if bridgelook.lower() == "yes":
-    print("You find a horrifying looking monster. He tells you to not worry.")
-    print()
-    print("He tells you that he wasn't anything to worry about.")
-    print("The creature asks if you wanted to be friends, and introduces himself as Golem.")
-    print()
-    print("You tell him you will be his friend, and he gives you 200 Gold.")
-    player_gold = player_gold + 200
+    else:
+        print("You feel an impending sense of doom of the path ahead of you.")
+        print("You don't know how to feel about it.")
 
 
-else:
-    print("You cross the bridge carefully. Nothing happens as you cross, and you continue down the path.")
+    print("You come across a bridge. There's a seemingly evil presence under it. Will you investigate or not.")
+
+    # prompt for more money
+    bridgelook = input("yes or no ")
+
+    if bridgelook.lower() == "yes":
+        print("You find a horrifying looking monster. He tells you to not worry.")
+        print()
+        print("He tells you that he wasn't anything to worry about.")
+        print("The creature asks if you wanted to be friends, and introduces himself as Golem.")
+        print()
+        print("You tell him you will be his friend, and he gives you 200 Gold.")
+        player_gold = player_gold + 200
 
 
-print("You felt a sense of unease rise onto your back. You turn and a goblin ambushes you!")
-
-# more battle
-battle("Strong Goblin", 300, 40)
+    else:
+        print("You cross the bridge carefully. Nothing happens as you cross, and you continue down the path.")
 
 
-print("The strong goblin falls beneath your strength. He gives you a permanent health upgrade.")
+    print("You felt a sense of unease rise onto your back. You turn and a goblin ambushes you!")
 
-# give player more hp for later things
-if player_class == 1:
-    print("Your max HP increased to 350")
-    max_player_health = 350
-    player_health = max_player_health
-    print("Your HP was also fully restored!")
-elif player_class == 2:
-    print("Your max HP increased to 180")
-    max_player_health = 180
-    player_health = max_player_health
-    print("Your HP was also fully restored!")
-elif player_class == 3:
-    print("Your max HP increased to 230")
-    max_player_health = 230
-    player_health = max_player_health
-    print("Your HP was also fully restored!")
+    # more battle
+    battle("Strong Goblin", 300, 40)
 
-# make it so that the hpup affects items
-hpup1 = True
+
+    print("The strong goblin falls beneath your strength. He gives you a permanent health upgrade.")
+
+    # give player more hp for later things
+    if player_class == 1:
+        print("Your max HP increased to 350")
+        max_player_health = 350
+        player_health = max_player_health
+        print("Your HP was also fully restored!")
+    elif player_class == 2:
+        print("Your max HP increased to 180")
+        max_player_health = 180
+        player_health = max_player_health
+        print("Your HP was also fully restored!")
+    elif player_class == 3:
+        print("Your max HP increased to 230")
+        max_player_health = 230
+        player_health = max_player_health
+        print("Your HP was also fully restored!")
+
+    # make it so that the hpup affects items
+    hpup1 = True
+
+
+story2()
 
 # story
-print("You press on going forawrd.")
-print()
-print()
-print()
-print("You enter a forest. You heard a twig break behind you and you look to see a young girl.")
-
-
-print("Be a monster?")
-print("1. Yes.")
-print("2. No.")
-
-# ask if the player wants to fight and impossible fight
-brutality = input("> ")
-
-
-if brutality.lower() == "yes":
-    print("You feel stronger. You leave the splatter of blood on the ground.")
-    print("Your fate is sealed.")
+def story3():
+    global player_health
+    global inventory
+    global max_player_health
+    global player_damage
+    global hpup1
+    global townfirsttime
+    global player_gold
+    global player_class
+    global player_class_name
+    global name
+    import random
+    print("You press on going forawrd.")
     print()
     print()
     print()
-    print("You encounter a dreadful Ogre. Be prepared.")
-    print("He judges you a distasteful stain of this world. Good luck.")
-    battle("Enraged Ogre", 9999999999, 100)
+    print("You enter a forest. You heard a twig break behind you and you look to see a young girl.")
 
 
-elif brutality.lower() == "no":
-    print("You give the girl a little flower.")
-    print("She runs off into the wilderness.")
+    print("Be a monster?")
+    print("1. Yes.")
+    print("2. No.")
+
+    # ask if the player wants to fight and impossible fight
+    brutality = input("> ")
 
 
-if manquestion.lower() == "yes":
-    print("You come across the Ogre that the strange man told you about.")
-    print("He thanks you for gifting his friend a flower.")
-    print()
-elif manquestion.lower() == "no":
-    print("You come across an Ogre")
-    print("He thanks you for gifting his friend a flower.")
+    if brutality.lower() == "yes":
+        print("You feel stronger. You leave the splatter of blood on the ground.")
+        print("Your fate is sealed.")
+        print()
+        print()
+        print()
+        print("You encounter a dreadful Ogre. Be prepared.")
+        print("He judges you a distasteful stain of this world. Good luck.")
+        battle("Enraged Ogre", 9999999999, 100)
 
-# hard fight?
 
-print("Attack the Ogre in fear?")
-print("Yes.")
-print("No.")
-ogrefight = input("> ")
+    elif brutality.lower() == "no":
+        print("You give the girl a little flower.")
+        print("She runs off into the wilderness.")
 
-# good luckkk
 
-if ogrefight.lower() in ["1", "yes"]:
-    print("You swing at the Ogre. He initates a fight.")
-    battle("Ogre", 850, 60)
-    player_gold = player_gold + random.randint(500, 700)
-# boring
-elif ogrefight.lower() in ["2", "no"]:
-    print("You carry on down the path.")
-    print("Good choice.")
+    if manquestion.lower() == "yes":
+        print("You come across the Ogre that the strange man told you about.")
+        print("He thanks you for gifting his friend a flower.")
+        print()
+    elif manquestion.lower() == "no":
+        print("You come across an Ogre")
+        print("He thanks you for gifting his friend a flower.")
+
+    # hard fight?
+
+    print("Attack the Ogre in fear?")
+    print("Yes.")
+    print("No.")
+    ogrefight = input("> ")
+
+    # good luckkk
+
+    if ogrefight.lower() in ["1", "yes"]:
+        print("You swing at the Ogre. He initates a fight.")
+        battle("Ogre", 850, 60)
+        player_gold = player_gold + random.randint(500, 700)
+    # boring
+    elif ogrefight.lower() in ["2", "no"]:
+        print("You carry on down the path.")
+        print("Good choice.")
 
 # atp the player wants or needs more items depending on their choices, so let em have it.
 road_shop()
@@ -435,7 +498,11 @@ def town_shop():
     global player_gold
     road_shop = False
 
-    print("The shopkeep welcomes you to his shop.")
+
+    if townfirsttime == True:
+        print("The shopkeep welcomes you. He says you look new around here. You exchange names and then begin browsing.")
+    elif townfirsttime == False:
+        print(f'The shopkeep welcomes you to his shop. "Welcome back {name}."')
     
     
     while road_shop == False:
@@ -478,8 +545,53 @@ def town_shop():
             print("Not an option!")
 
 
+def town_tavern():
+    global player_health
+    global inventory
+    global max_player_health
+    global player_damage
+    global hpup1
+    global townfirsttime
+    global player_gold
+    global player_class
+    global player_class_name
+    global name
+    import random
 
+
+    if townfirsttime == True:
+        print("You enter the tavern down the small main street. the barkeep welcomes you.")
+        print("He lets you know that the Tavern also has an Inn attached, most people aren't used to that.")
+        print()
+        print()
+        print(f'He asks your name. You say with a charming confidence. "{name}." The barkeep nods.')
+        print("You take a seat at the bar.")
+    elif townfirsttime == False:
+        print(f'The Barkeep welcomes you. "Sup {name}." he says. You walk in as normal and sit at the bar.')
+
+
+    print("What would you like to do? (type the letters in ' ' to purchase)")
+    print("Purchase 'HP' Upgrade, (3x in stock 175 Gold). Purchase 'DMG' Upgrade, (2x in stock, 150 Gold). Stay in a room in the Inn. (80 Gold)")    
+    tavernbought = input("> ")
+
+
+    if tavernbought.lower == hp:
+        print("The barkeep hands you a red liquid. You drink it and feel blissful. Your HP was permanently upgraded.")
+                
+        
+# FINALLY DEFINE SAVING!
 def save_game():
+    global player_health
+    global inventory
+    global max_player_health
+    global player_damage
+    global hpup1
+    global townfirsttime
+    global player_gold
+    global player_class
+    global player_class_name
+    global name
+    import random
     save_data = {
         "player_health" : player_health,
         "max_player_health" : max_player_health,
@@ -497,10 +609,18 @@ def save_game():
 
 
     print("Game saved!")
-
+#new global hub area.
 def town():
-    global player_gold
+    global player_health
+    global inventory
+    global max_player_health
+    global player_damage
+    global hpup1
     global townfirsttime
+    global player_gold
+    global player_class
+    global player_class_name
+    import random
     towncomplete = False
     while towncomplete == False:
         if townfirsttime == True:
@@ -514,8 +634,13 @@ def town():
         print()
         print("What would you like to do?")
         print("1, Shop")
-        print("2. Tavern.")
-        print("3. Leave the town. WARNING, this will proceed your game and you may not be able to come back for a long time.")
+        print("2. Tavern/Inn.")
+        print("3. Save Game.")
+        print("4. Leave the town. WARNING, this will proceed your game and you may not be able to come back for a long time.")
 
 
         townoption = input("> ")
+
+
+        if townoption.lower() in ["1", "shop"]:
+            town_shop()
